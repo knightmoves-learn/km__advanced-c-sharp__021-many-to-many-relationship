@@ -37,7 +37,6 @@ namespace HomeEnergyApi.Models
         {
             return context.Homes
             .Include(h => h.HomeUsageData)
-            .Include(h => h.HomeUtilityProviders)
             .ToList();
         }
 

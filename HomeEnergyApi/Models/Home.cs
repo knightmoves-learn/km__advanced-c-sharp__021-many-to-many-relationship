@@ -9,7 +9,6 @@ namespace HomeEnergyApi.Models
         public string? StreetAddress { get; set; }
         public string? City { get; set; }
         public HomeUsageData? HomeUsageData { get; set; }
-        public ICollection<HomeUtilityProvider> HomeUtilityProviders { get; set; }
 
         public Home(string ownerLastName, string? streetAddress, string? city)
         {

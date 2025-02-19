@@ -8,7 +8,5 @@ namespace HomeEnergyApi.Models
 
         public DbSet<Home> Homes { get; set; }
         public DbSet<HomeUsageData> HomeUsageDatas { get; set; }
-        public DbSet<UtilityProvider> UtilityProviders { get; set; }
-        public DbSet<HomeUtilityProvider> HomeUtilityProviders { get; set; }
     }
 }

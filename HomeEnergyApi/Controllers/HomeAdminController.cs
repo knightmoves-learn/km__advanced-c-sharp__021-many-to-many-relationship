@@ -13,13 +13,11 @@ namespace HomeEnergyApi.Controllers
         private IWriteRepository<int, Home> repository;
         private ZipCodeLocationService zipCodeLocationService;
         private IMapper mapper;
-        private HomeUtilityProviderService homeUtilityProviderService;
 
-        public HomeAdminController(IWriteRepository<int, Home> repository, ZipCodeLocationService zipCodeLocationService, HomeUtilityProviderService homeUtilityProviderService, IMapper mapper)
+        public HomeAdminController(IWriteRepository<int, Home> repository, ZipCodeLocationService zipCodeLocationService, IMapper mapper)
         {
             this.repository = repository;
             this.zipCodeLocationService = zipCodeLocationService;
-            this.homeUtilityProviderService = homeUtilityProviderService;
             this.mapper = mapper;
         }
 
@@ -28,7 +26,6 @@ namespace HomeEnergyApi.Controllers
         {
             Home home = mapper.Map<Home>(homeDto);
             repository.Save(home);
-            homeUtilityProviderService.Associate(home, homeDto.UtilityProviderIds);
             return Created($"/Homes/{repository.Count()}", home);
         }
 
