@@ -2,7 +2,7 @@
 
 ## Lecture
 
-[![# Many To Many Relationships (Part 1)](https://img.youtube.com/vi/egmPuRlaNoo/0.jpg)](https://www.youtube.com/watch?v=LUOpye2AxVk)
+[![# Many To Many Relationships (Part 1)](https://img.youtube.com/vi/egmPuRlaNoo/0.jpg)](https://www.youtube.com/watch?v=egmPuRlaNoo)
 [![# Many To Many Relationships (Part 2)](https://img.youtube.com/vi/PTPPW2rllRQ/0.jpg)](https://www.youtube.com/watch?v=PTPPW2rllRQ)
 
 ## Instructions
