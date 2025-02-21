@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 namespace HomeEnergyApi.Models
 {
-    public class UtilityProvider
+    public class Home
     {
         [Key]
         public int Id { get; set; }
@@ -11,7 +11,7 @@ namespace HomeEnergyApi.Models
         public HomeUsageData? HomeUsageData { get; set; }
         public ICollection<HomeUtilityProvider> HomeUtilityProviders {get; set;}
 
-        public UtilityProvider(string ownerLastName, string? streetAddress, string? city)
+        public Home(string ownerLastName, string? streetAddress, string? city)
         {
             OwnerLastName = ownerLastName;
             StreetAddress = streetAddress;

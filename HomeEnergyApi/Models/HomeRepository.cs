@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
 
 namespace HomeEnergyApi.Models
 {
-    public class HomeRepository : IReadRepository<int, UtilityProvider>, IWriteRepository<int, UtilityProvider>
+    public class HomeRepository : IReadRepository<int, Home>, IWriteRepository<int, Home>
     {
         private HomeDbContext context;
 
@@ -11,7 +12,7 @@ namespace HomeEnergyApi.Models
             this.context = context;
         }
 
-        public UtilityProvider Save(UtilityProvider home)
+        public Home Save(Home home)
         {
             if (home.HomeUsageData != null)
             {
@@ -20,42 +21,43 @@ namespace HomeEnergyApi.Models
                 context.HomeUsageDatas.Add(usageData);
             }
 
-            context.UtilityProviders.Add(home);
+            context.Homes.Add(home);
             context.SaveChanges();
             return home;
         }
 
-        public UtilityProvider Update(int id, UtilityProvider home)
+        public Home Update(int id, Home home)
         {
             home.Id = id;
-            context.UtilityProviders.Update(home);
+            context.Homes.Update(home);
             context.SaveChanges();
             return home;
         }
 
-        public List<UtilityProvider> FindAll()
+        public List<Home> FindAll()
         {
-            return context.UtilityProviders
+            return context.Homes
             .Include(h => h.HomeUsageData)
+            .Include(h => h.HomeUtilityProviders)
             .ToList();
         }
 
-        public UtilityProvider FindById(int id)
+        public Home FindById(int id)
         {
-            return context.UtilityProviders.Find(id);
+            return context.Homes.Find(id);
         }
 
-        public UtilityProvider RemoveById(int id)
+        public Home RemoveById(int id)
         {
-            var home = context.UtilityProviders.Find(id);
-            context.UtilityProviders.Remove(home);
+            var home = context.Homes.Find(id);
+            context.Homes.Remove(home);
             context.SaveChanges();
             return home;
         }
 
         public int Count()
         {
-            return context.UtilityProviders.Count();
+            return context.Homes.Count();
         }
     }
 }

@@ -10,5 +10,6 @@ namespace HomeEnergyApi.Dtos
         public string? StreetAddress { get; set; }
         public string? City { get; set; }
         public int? MonthlyElectricUsage { get; set; }
+        public ICollection<int>? UtilityProviderIds { get; set; }
     }
 }

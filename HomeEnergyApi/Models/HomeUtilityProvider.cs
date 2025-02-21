@@ -10,6 +10,6 @@ namespace HomeEnergyApi.Models
         public UtilityProvider UtilityProvider {get; set;}
         public int HomeId {get; set;}
         [JsonIgnore]
-        public UtilityProvider Home {get; set;}
+        public Home Home {get; set;}
     }
 }

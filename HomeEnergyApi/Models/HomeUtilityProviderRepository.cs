@@ -1,8 +1,9 @@
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeEnergyApi.Models
 {
-    public class HomeUtilityProviderRepository : IWriteRepository<int, UtilityProvider>, IReadRepository<int, UtilityProvider>
+    public class HomeUtilityProviderRepository : IWriteRepository<int, HomeUtilityProvider>, IReadRepository<int, HomeUtilityProvider>
     {
         private HomeDbContext context;
 
@@ -10,46 +11,44 @@ namespace HomeEnergyApi.Models
         {
             this.context = context;
         }
-        //The following needs to be refactored from Home to UtilityProvider
-        public UtilityProvider Save(UtilityProvider utilityProvider)
+    
+        public HomeUtilityProvider Save(HomeUtilityProvider homeUtilityProvider)
         {
-            context.UtilityProviders.Add(utilityProvider);
+            context.HomeUtilityProviders.Add(homeUtilityProvider);
             context.SaveChanges();
-            return utilityProvider;
+            return homeUtilityProvider;
         }
 
-        public UtilityProvider Update(int id, UtilityProvider utilityProvider)
+        public HomeUtilityProvider Update(int id, HomeUtilityProvider homeUtilityProvider)
         {
-            utilityProvider.Id = id;
-            context.HomeUtilityProviders.Update(utilityProvider);
+            homeUtilityProvider.Id = id;
+            context.HomeUtilityProviders.Update(homeUtilityProvider);
             context.SaveChanges();
-            return utilityProvider;
+            return homeUtilityProvider;
         }
 
-        public List<UtilityProvider> FindAll()
+        public List<HomeUtilityProvider> FindAll()
         {
-            return context.UtilityProviders
-            .Include(h => h.HomeUsageData)
+            return context.HomeUtilityProviders
             .ToList();
         }
 
-        public UtilityProvider FindById(int id)
+        public HomeUtilityProvider FindById(int id)
         {
-            return context.UtilityProviders.Find(id);
+            return context.HomeUtilityProviders.Find(id);
         }
 
-        public UtilityProvider RemoveById(int id)
+        public HomeUtilityProvider RemoveById(int id)
         {
-            var provider = context.UtilityProviders.Find(id);
-            context.UtilityProviders.Remove(provider);
+            var provider = context.HomeUtilityProviders.Find(id);
+            context.HomeUtilityProviders.Remove(provider);
             context.SaveChanges();
             return provider;
         }
 
         public int Count()
         {
-            return context.UtilityProviders.Count();
+            return context.HomeUtilityProviders.Count();
         }
     }
-
 }
