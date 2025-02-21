@@ -9,7 +9,7 @@ namespace HomeEnergyApi.Models
         public int HomeId { get; set; }
 
         [JsonIgnore]
-        public Home? Home { get; set; } = null!;
+        public UtilityProvider? Home { get; set; } = null!;
 
     }
 

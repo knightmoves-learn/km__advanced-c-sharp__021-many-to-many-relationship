@@ -7,9 +7,9 @@ namespace HomeEnergyApi.Controllers
     [Route("[controller]")]
     public class HomesController : ControllerBase
     {
-        private IReadRepository<int, Home> repository;
+        private IReadRepository<int, UtilityProvider> repository;
 
-        public HomesController(IReadRepository<int, Home> repository)
+        public HomesController(IReadRepository<int, UtilityProvider> repository)
         {
             this.repository = repository;
         }

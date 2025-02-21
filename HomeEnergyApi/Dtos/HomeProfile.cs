@@ -7,7 +7,7 @@ namespace HomeEnergyApi.Dtos
     {
         public HomeProfile()
         {
-            CreateMap<HomeDto, Home>()
+            CreateMap<HomeDto, UtilityProvider>()
                 .ForMember(dest => dest.HomeUsageData,
                            opt => opt.MapFrom(src => src.MonthlyElectricUsage != null
                                                      ? new HomeUsageData { MonthlyElectricUsage = src.MonthlyElectricUsage }

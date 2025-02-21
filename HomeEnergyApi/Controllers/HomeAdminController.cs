@@ -10,11 +10,11 @@ namespace HomeEnergyApi.Controllers
     [Route("admin/Homes")]
     public class HomeAdminController : ControllerBase
     {
-        private IWriteRepository<int, Home> repository;
+        private IWriteRepository<int, UtilityProvider> repository;
         private ZipCodeLocationService zipCodeLocationService;
         private IMapper mapper;
 
-        public HomeAdminController(IWriteRepository<int, Home> repository, ZipCodeLocationService zipCodeLocationService, IMapper mapper)
+        public HomeAdminController(IWriteRepository<int, UtilityProvider> repository, ZipCodeLocationService zipCodeLocationService, IMapper mapper)
         {
             this.repository = repository;
             this.zipCodeLocationService = zipCodeLocationService;
@@ -24,14 +24,14 @@ namespace HomeEnergyApi.Controllers
         [HttpPost]
         public IActionResult CreateHome([FromBody] HomeDto homeDto)
         {
-            Home home = mapper.Map<Home>(homeDto);
+            UtilityProvider home = mapper.Map<UtilityProvider>(homeDto);
             repository.Save(home);
-            return Created($"/Homes/{repository.Count()}", home);
+            return Created($"/Homes/{repository.Count}()", home);
         }
 
         public IActionResult UpdateHome([FromBody] HomeDto homeDto, [FromRoute] int id)
         {
-            Home home = mapper.Map<Home>(homeDto); ;
+            UtilityProvider home = mapper.Map<UtilityProvider>(homeDto); ;
             if (id > (repository.Count() - 1))
             {
                 return NotFound();

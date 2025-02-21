@@ -7,14 +7,14 @@ using Microsoft.EntityFrameworkCore;
 [TestCaseOrderer("HomeEnergyApi.Tests.Extensions.PriorityOrderer", "HomeEnergyApi.Tests")]
 public class HomeRepositoryTests
 {
-    private Home testHomeToSave = new Home("Savey", "789 Save Ave.", "Savetown");
-    private Home testHomeToUpdate = new Home("Updater", "333 Update Ave.", "Updateeee");
+    private UtilityProvider testHomeToSave = new UtilityProvider("Savey", "789 Save Ave.", "Savetown");
+    private UtilityProvider testHomeToUpdate = new UtilityProvider("Updater", "333 Update Ave.", "Updateeee");
 
 
-    private List<Home> testHomes = new List<Home>()
+    private List<UtilityProvider> testHomes = new List<UtilityProvider>()
         {
-            new Home("Testy", "456 Assert St.", "Unitville"),
-            new Home("Test", "123 Test St.", "Test City")
+            new UtilityProvider("Testy", "456 Assert St.", "Unitville"),
+            new UtilityProvider("Test", "123 Test St.", "Test City")
         };
 
     private readonly DbConnection _connection;
@@ -124,14 +124,14 @@ FROM Homes;";
     [Fact, TestPriority(7)]
     public void HomeRepositoryImplementsIReadRepositoryINTHOME()
     {
-        Assert.True(typeof(IReadRepository<int, Home>).IsAssignableFrom(typeof(HomeRepository)),
+        Assert.True(typeof(IReadRepository<int, UtilityProvider>).IsAssignableFrom(typeof(HomeRepository)),
             "The class HomeRepository Does Not Implement \"IRepository<int, Home>\"");
     }
 
     [Fact, TestPriority(8)]
     public void HomeRepositoryImplementsIWriteRepositoryINTHOME()
     {
-        Assert.True(typeof(IWriteRepository<int, Home>).IsAssignableFrom(typeof(HomeRepository)),
+        Assert.True(typeof(IWriteRepository<int, UtilityProvider>).IsAssignableFrom(typeof(HomeRepository)),
             "The class HomeRepository Does Not Implement \"IRepository<int, Home>\"");
     }
 }
