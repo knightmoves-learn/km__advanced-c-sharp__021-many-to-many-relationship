@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Reflection.Metadata.Ecma335;
 using HomeEnergyApi.Models;
 
 namespace HomeEnergyApi.Services
@@ -15,7 +16,7 @@ namespace HomeEnergyApi.Services
             this.homeUtilityRepository = homeUtilityRepository;
         }
 
-        public UtilityProvider Associate(Home home, ICollection<int> utilityProviderIds)
+        public Home Associate(Home home, ICollection<int> utilityProviderIds)
         {
             if(utilityProviderIds != null)
             {
@@ -31,7 +32,10 @@ namespace HomeEnergyApi.Services
                     homeUtilityRepository.Save(homeUtilityProvider);
                 }
             }
+
+            return home;
         }
 
+        
     }
 }
