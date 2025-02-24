@@ -15,6 +15,11 @@ builder.Services.AddScoped<IWriteRepository<int, Home>>(provider => provider.Get
 builder.Services.AddScoped<UtilityProviderRepository>();
 builder.Services.AddScoped<IReadRepository<int, UtilityProvider>>(provider => provider.GetRequiredService<UtilityProviderRepository>());
 builder.Services.AddScoped<IWriteRepository<int, UtilityProvider>>(provider => provider.GetRequiredService<UtilityProviderRepository>());
+
+builder.Services.AddScoped<HomeUtilityProviderRepository>();
+builder.Services.AddScoped<IReadRepository<int, HomeUtilityProvider>>(provider => provider.GetRequiredService<HomeUtilityProviderRepository>());
+builder.Services.AddScoped<IWriteRepository<int, HomeUtilityProvider>>(provider => provider.GetRequiredService<HomeUtilityProviderRepository>());
+
 builder.Services.AddTransient<HomeUtilityProviderService>();
 
 builder.Services.AddTransient<ZipCodeLocationService>();
