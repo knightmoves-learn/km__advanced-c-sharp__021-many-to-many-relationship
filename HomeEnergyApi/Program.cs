@@ -20,10 +20,11 @@ builder.Services.AddScoped<HomeUtilityProviderRepository>();
 builder.Services.AddScoped<IReadRepository<int, HomeUtilityProvider>>(provider => provider.GetRequiredService<HomeUtilityProviderRepository>());
 builder.Services.AddScoped<IWriteRepository<int, HomeUtilityProvider>>(provider => provider.GetRequiredService<HomeUtilityProviderRepository>());
 
-builder.Services.AddTransient<HomeUtilityProviderService>();
 
 builder.Services.AddTransient<ZipCodeLocationService>();
 builder.Services.AddHttpClient<ZipCodeLocationService>();
+
+builder.Services.AddTransient<HomeUtilityProviderService>();
 
 builder.Services.AddDbContext<HomeDbContext>(options =>
     options.UseSqlite("Data Source=Homes.db").ConfigureWarnings(warings =>
