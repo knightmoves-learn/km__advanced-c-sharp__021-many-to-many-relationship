@@ -13,7 +13,7 @@ In `HomeEnergyApi/Models/UtilityProvider.cs`
 - Create a public class `UtilityProvider` with the following property names / types
     - Id / `int`
     - Name / `string?`
-    - ProvidedUtilities / `ICollection<string>`
+    - ProvidedUtilities / `ICollection<string>`?
 
 In `HomeEnergyApi/Models/HomeUtilityProvider.cs`
 - Create a public class `HomeUtilityProvider` with the following property names / types
@@ -26,7 +26,7 @@ In `HomeEnergyApi/Models/HomeUtilityProvider.cs`
         - With the `JsonIgnore` attribute
 
 In `HomeEnergyApi/Models/Home.cs`
-- Give `Home` the public property `HomeUtilityProviders` with the type `ICollection<HomeUtilityProvider>`
+- Give `Home` the public property `HomeUtilityProviders` with the type `ICollection<HomeUtilityProvider>?`
 
 In `HomeEnergyApi/Models/UtilityProvider.cs`
 - Give `UtilityProvider` the public property `HomeUtilityProviders` with the type `ICollection<HomeUtilityProvider>`
