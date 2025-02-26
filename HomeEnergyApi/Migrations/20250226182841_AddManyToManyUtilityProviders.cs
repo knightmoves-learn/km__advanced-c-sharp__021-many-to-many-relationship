@@ -1,0 +1,121 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace HomeEnergyApi.Migrations
+{
+    /// <inheritdoc />
+    public partial class AddManyToManyUtilityProviders : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.CreateTable(
+                name: "Homes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    OwnerLastName = table.Column<string>(type: "TEXT", nullable: false),
+                    StreetAddress = table.Column<string>(type: "TEXT", nullable: true),
+                    City = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Homes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UtilityProviders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    ProvidedUtilities = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UtilityProviders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HomeUsageDatas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    MonthlyElectricUsage = table.Column<int>(type: "INTEGER", nullable: true),
+                    HomeId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HomeUsageDatas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HomeUsageDatas_Homes_HomeId",
+                        column: x => x.HomeId,
+                        principalTable: "Homes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HomeUtilityProviders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UtilityProviderId = table.Column<int>(type: "INTEGER", nullable: false),
+                    HomeId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HomeUtilityProviders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HomeUtilityProviders_Homes_HomeId",
+                        column: x => x.HomeId,
+                        principalTable: "Homes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HomeUtilityProviders_UtilityProviders_UtilityProviderId",
+                        column: x => x.UtilityProviderId,
+                        principalTable: "UtilityProviders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HomeUsageDatas_HomeId",
+                table: "HomeUsageDatas",
+                column: "HomeId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HomeUtilityProviders_HomeId",
+                table: "HomeUtilityProviders",
+                column: "HomeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HomeUtilityProviders_UtilityProviderId",
+                table: "HomeUtilityProviders",
+                column: "UtilityProviderId");
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "HomeUsageDatas");
+
+            migrationBuilder.DropTable(
+                name: "HomeUtilityProviders");
+
+            migrationBuilder.DropTable(
+                name: "Homes");
+
+            migrationBuilder.DropTable(
+                name: "UtilityProviders");
+        }
+    }
+}

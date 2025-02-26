@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeEnergyApi.Migrations
 {
     [DbContext(typeof(HomeDbContext))]
-    [Migration("20250219034257_RemoveOldUtilityProviderTable")]
-    partial class RemoveOldUtilityProviderTable
+    [Migration("20250226182841_AddManyToManyUtilityProviders")]
+    partial class AddManyToManyUtilityProviders
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,44 @@ namespace HomeEnergyApi.Migrations
                     b.ToTable("HomeUsageDatas");
                 });
 
+            modelBuilder.Entity("HomeEnergyApi.Models.HomeUtilityProvider", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("HomeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UtilityProviderId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HomeId");
+
+                    b.HasIndex("UtilityProviderId");
+
+                    b.ToTable("HomeUtilityProviders");
+                });
+
+            modelBuilder.Entity("HomeEnergyApi.Models.UtilityProvider", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.PrimitiveCollection<string>("ProvidedUtilities")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UtilityProviders");
+                });
+
             modelBuilder.Entity("HomeEnergyApi.Models.HomeUsageData", b =>
                 {
                     b.HasOne("HomeEnergyApi.Models.Home", "Home")
@@ -71,9 +109,35 @@ namespace HomeEnergyApi.Migrations
                     b.Navigation("Home");
                 });
 
+            modelBuilder.Entity("HomeEnergyApi.Models.HomeUtilityProvider", b =>
+                {
+                    b.HasOne("HomeEnergyApi.Models.Home", "Home")
+                        .WithMany("HomeUtilityProviders")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HomeEnergyApi.Models.UtilityProvider", "UtilityProvider")
+                        .WithMany("HomeUtilityProviders")
+                        .HasForeignKey("UtilityProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Home");
+
+                    b.Navigation("UtilityProvider");
+                });
+
             modelBuilder.Entity("HomeEnergyApi.Models.Home", b =>
                 {
                     b.Navigation("HomeUsageData");
+
+                    b.Navigation("HomeUtilityProviders");
+                });
+
+            modelBuilder.Entity("HomeEnergyApi.Models.UtilityProvider", b =>
+                {
+                    b.Navigation("HomeUtilityProviders");
                 });
 #pragma warning restore 612, 618
         }

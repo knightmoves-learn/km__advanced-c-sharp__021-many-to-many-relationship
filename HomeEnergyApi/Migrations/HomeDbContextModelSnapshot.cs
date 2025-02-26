@@ -88,7 +88,6 @@ namespace HomeEnergyApi.Migrations
                         .HasColumnType("TEXT");
 
                     b.PrimitiveCollection<string>("ProvidedUtilities")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

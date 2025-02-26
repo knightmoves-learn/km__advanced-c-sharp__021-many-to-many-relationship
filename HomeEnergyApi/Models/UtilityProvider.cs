@@ -8,8 +8,8 @@ namespace HomeEnergyApi.Models
 
         public string? Name {get; set;}
 
-        public ICollection<string> ProvidedUtilities {get; set;}
+        public ICollection<string>? ProvidedUtilities {get; set;}
         
-        public ICollection<HomeUtilityProvider> HomeUtilityProviders {get; set;}
+        public ICollection<HomeUtilityProvider>? HomeUtilityProviders {get; set;}
     }
 }
