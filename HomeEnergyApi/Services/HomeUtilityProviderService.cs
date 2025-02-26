@@ -9,7 +9,7 @@ namespace HomeEnergyApi.Services
         public IReadRepository<int, UtilityProvider> utilityProviderRepository { get; set; }
         public IWriteRepository<int, HomeUtilityProvider> homeUtilityRepository { get; set; }
 
-        HomeUtilityProviderService(IReadRepository<int, UtilityProvider> utilityProviderRepository,
+        public HomeUtilityProviderService(IReadRepository<int, UtilityProvider> utilityProviderRepository,
             IWriteRepository<int, HomeUtilityProvider> homeUtilityRepository)
         {
             this.utilityProviderRepository = utilityProviderRepository;
